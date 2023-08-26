@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Book Rating</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <style>
+        .container-fluid {
+            padding-left: 0;
+        }
+
+        .sidebar {
+            background-color: #343a40;
+            color: white;
+            padding-top: 50px;
+            height: 100vh;
+        }
+
+        .nav-link {
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        .nav-item.btn {
+            width: 100%;
+            border-radius: 0;
+            box-shadow: none;
+            border: none;
+        }
+
+        .nav-item.btn:hover {
+            background-color: #dc3545;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body class="bg-dark text-light">
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 col-lg-2 d-md-block sidebar">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item btn btn-danger">
+                            <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                        </li>
+                        <li class="nav-item btn btn-danger">
+                            <a class="nav-link" href="{{ url_for('add') }}">Add Book</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="col-md-10 col-lg-10 ms-md-auto px-md-4 main-content">
+                <div class="container mt-5">
+                    <h1 class="fw-bold font-monospace">Edit Book Rating</h1>
+                    <form action="{{ url_for('edit', book_id=book.id) }}" method="POST" novalidate class="mx-auto">
+                        {{ form.csrf_token() }}
+                        <p class="fw-normal">
+                            Book's Name: {{ book.title }}
+                            <br>
+                            Book's Author: {{ book.author}}
+                            <br>
+                            Book's Current Rating: {{ book.rating }}
+                        </p>
+                        <div class="mb-3 w-50">
+                            <label for="{{ form.rating.id }}" class="form-label">New Rating</label>
+                            <select class="form-select" id="{{ form.rating.id }}" name="{{ form.rating.name }}">
+                                <option value="0">0/10</option>
+                                <option value="1">1/10</option>
+                                <option value="2">2/10</option>
+                                <option value="3">3/10</option>
+                                <option value="4">4/10</option>
+                                <option value="5">5/10</option>
+                                <option value="6">6/10</option>
+                                <option value="7">7/10</option>
+                                <option value="8">8/10</option>
+                                <option value="9">9/10</option>
+                                <option value="10">10/10</option>
+                            </select>
+                        </div>
+                        {{ form.submit(class="btn btn-success w-auto") }}
+                    </form>
+                    <p class="pt-2">
+                        <a href="{{ url_for('home') }}">Back to home</a>
+                    </p>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
